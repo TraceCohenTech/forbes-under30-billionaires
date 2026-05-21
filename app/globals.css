@@ -89,3 +89,57 @@ html, body {
   font-family: inherit;
   transition: all 0.15s ease;
 }
+
+/* ── Responsive layout ────────────────────────────────────────────────────── */
+
+.hero-inner { padding: 0 40px; }
+.page-body  { padding: 28px 40px 72px; display: flex; flex-direction: column; gap: 28px; }
+.hero-title { font-size: 64px; font-weight: 900; letter-spacing: -0.04em; line-height: 0.95; margin: 0; }
+
+.bento-stats  { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.bento-anchor { grid-column: span 2; grid-row: span 2; }
+
+.analytics-bento { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.analytics-donut  { grid-column: span 2; grid-row: span 2; }
+.analytics-chart  { grid-column: span 2; }
+
+.two-col  { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.four-col { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+
+.hall-row       { display: flex; gap: 14px; }
+.hall-row > div { flex: 1; min-width: 0; }
+
+.section-title { font-size: 26px; }
+
+@media (max-width: 900px) {
+  .hero-inner { padding: 0 24px; }
+  .page-body  { padding: 20px 24px 64px; }
+  .hero-title { font-size: 48px; }
+  .section-title { font-size: 22px; }
+
+  .bento-stats  { grid-template-columns: 1fr 1fr; }
+  .bento-anchor { grid-row: span 1; }
+
+  .analytics-bento { grid-template-columns: 1fr 1fr; }
+  .analytics-donut  { grid-row: span 1; }
+  .analytics-chart  { grid-column: span 1; }
+
+  .four-col { grid-template-columns: 1fr 1fr; }
+
+  .hall-row        { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 6px; }
+  .hall-row > div  { min-width: 200px !important; flex: none !important; }
+}
+
+@media (max-width: 640px) {
+  .hero-inner { padding: 0 16px; }
+  .page-body  { padding: 14px 16px 56px; }
+  .hero-title { font-size: 36px; }
+  .section-title { font-size: 20px; }
+
+  .two-col  { grid-template-columns: 1fr; }
+  .four-col { grid-template-columns: 1fr; }
+
+  .analytics-bento { grid-template-columns: 1fr; }
+  .analytics-donut  { grid-column: span 1; }
+  .analytics-chart  { grid-column: span 1; }
+}

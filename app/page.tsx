@@ -107,7 +107,7 @@ function SectorChip({ sector }: { sector: string }) {
 function SectionLabel({ title, subtitle }: { title: string; subtitle?: string }) {
   return (
     <div style={{ marginBottom:22, paddingBottom:18, borderBottom:"2px solid #e5e7eb" }}>
-      <h2 style={{ fontSize:26, fontWeight:800, color:"#0f172a", margin:0, letterSpacing:"-0.025em", lineHeight:1.2 }}>
+      <h2 className="section-title" style={{ fontWeight:800, color:"#0f172a", margin:0, letterSpacing:"-0.025em", lineHeight:1.2 }}>
         {title}
       </h2>
       {subtitle && <p style={{ fontSize:13, color:"#6b7280", margin:"6px 0 0", lineHeight:1.5 }}>{subtitle}</p>}
@@ -171,7 +171,7 @@ function HallCard({ person, rank }: { person: Billionaire; rank: number }) {
     <div className="hall-card" style={{
       background:cfg.bg, border:`1px solid ${cfg.border}`,
       borderRadius:20, padding:"24px 20px 20px",
-      flex:1, minWidth:0, position:"relative", overflow:"hidden",
+      position:"relative", overflow:"hidden",
       boxShadow:`0 0 40px ${cfg.glow}, 0 6px 24px rgba(0,0,0,0.28)`,
     }}>
       <div style={{ position:"absolute", top:0, left:0, right:0, height:3,
@@ -371,7 +371,7 @@ export default function Dashboard() {
         <div style={{ position:"absolute", top:-100, right:0, width:600, height:600, borderRadius:"50%",
           background:"radial-gradient(circle,rgba(240,192,64,0.065) 0%,transparent 65%)", pointerEvents:"none" }} />
 
-        <div style={{ maxWidth:1300, margin:"0 auto", padding:"0 40px", position:"relative" }}>
+        <div style={{ maxWidth:1300, margin:"0 auto", position:"relative" }} className="hero-inner">
           <div style={{ display:"flex", alignItems:"center", gap:8, marginBottom:18 }}>
             <div style={{ width:6, height:6, borderRadius:"50%", background:"#f0c040", boxShadow:"0 0 10px rgba(240,192,64,0.9)" }} />
             <span style={{ fontSize:11, color:"rgba(255,255,255,0.48)", fontWeight:700, letterSpacing:"0.2em", textTransform:"uppercase" }}>
@@ -380,7 +380,7 @@ export default function Dashboard() {
           </div>
 
           <div style={{ display:"flex", alignItems:"flex-end", justifyContent:"space-between", flexWrap:"wrap", gap:24, marginBottom:20 }}>
-            <h1 style={{ fontSize:64, fontWeight:900, letterSpacing:"-0.04em", lineHeight:0.95, margin:0 }}>
+            <h1 className="hero-title" style={{ letterSpacing:"-0.04em", lineHeight:0.95, margin:0 }}>
               <span className="gold-shimmer">Under-30</span>
               <br />
               <span style={{ color:"#fff" }}>Billionaires</span>
@@ -423,12 +423,12 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div style={{ maxWidth:1300, margin:"0 auto", padding:"28px 40px 72px", display:"flex", flexDirection:"column", gap:28 }} className="fade-up">
+      <div style={{ maxWidth:1300, margin:"0 auto" }} className="page-body fade-up">
 
         {/* ── BENTO STATS ── */}
-        <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:14 }}>
+        <div className="bento-stats">
           {/* Anchor: spans 2 cols × 2 rows */}
-          <div style={{ gridColumn:"span 2", gridRow:"span 2" }}>
+          <div className="bento-anchor">
             <AnchorCard
               value={`$${aNW.toFixed(1)}B`}
               label="Combined Net Worth"
@@ -455,7 +455,7 @@ export default function Dashboard() {
         {/* ── HALL OF FAME ── */}
         <div>
           <SectionLabel title="🏆 Hall of Fame" subtitle="The five wealthiest people under 30 on earth" />
-          <div style={{ display:"flex", gap:14 }}>
+          <div className="hall-row">
             {top5.map(p => <HallCard key={p.rank} person={p} rank={p.rank} />)}
           </div>
         </div>
@@ -463,9 +463,9 @@ export default function Dashboard() {
         {/* ── ANALYTICS BENTO ── */}
         <div>
           <SectionLabel title="Wealth Breakdown" subtitle="Origin split, average net worth by type, and age distribution" />
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:14 }}>
+          <div className="analytics-bento">
             {/* Donut: 2 cols × 2 rows */}
-            <div style={{ gridColumn:"span 2", gridRow:"span 2" }}>
+            <div className="analytics-donut">
               <div style={{ ...card, padding:"22px", height:"100%" }}>
                 <div style={{ display:"flex", alignItems:"center", gap:7, marginBottom:16 }}>
                   <div style={{ width:3, height:12, borderRadius:2, background:INH }} />
@@ -508,7 +508,7 @@ export default function Dashboard() {
             </div>
 
             {/* Avg NW by type */}
-            <div style={{ gridColumn:"span 2" }}>
+            <div className="analytics-chart">
               <ChartCard title="Avg Net Worth by Type" accent="#059669" height={160}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={avgByType} margin={{ top:4, right:12, bottom:4, left:8 }}>
@@ -526,7 +526,7 @@ export default function Dashboard() {
             </div>
 
             {/* Age distribution */}
-            <div style={{ gridColumn:"span 2" }}>
+            <div className="analytics-chart">
               <ChartCard title="Age Distribution" accent="#0891b2" height={160}>
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={ageGroups} margin={{ top:4, right:12, bottom:4, left:8 }}>
@@ -545,7 +545,7 @@ export default function Dashboard() {
         {/* ── BY COUNTRY ── */}
         <div>
           <SectionLabel title="By Country" subtitle="Billionaires and combined net worth per nation" />
-          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
+          <div className="two-col">
             <ChartCard title="Billionaires by Country" height={320} accent={SM}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={countryData} layout="vertical" margin={{ top:4, right:20, bottom:4, left:116 }}>
@@ -578,7 +578,7 @@ export default function Dashboard() {
         {/* ── INDIVIDUALS & COMPANIES ── */}
         <div>
           <SectionLabel title="By Individual & Company" subtitle="Red = inherited · Blue = self-made" />
-          <div style={{ display:"grid", gridTemplateColumns:"1fr 1fr", gap:14 }}>
+          <div className="two-col">
             <ChartCard title="Net Worth — Top 20 Individuals" height={460} accent={INH}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={top20} layout="vertical" margin={{ top:4, right:20, bottom:4, left:98 }}>
@@ -623,7 +623,7 @@ export default function Dashboard() {
         {/* ── INSIGHTS ── 4-column horizontal strip */}
         <div>
           <SectionLabel title="Key Insights" subtitle="Patterns and takeaways from the 2026 cohort" />
-          <div style={{ display:"grid", gridTemplateColumns:"repeat(4,1fr)", gap:14 }}>
+          <div className="four-col">
             {insights.map((ins, i) => (
               <div key={i} className="card-lift" style={{
                 ...card, borderLeft:`4px solid ${ins.color}`, padding:"20px 20px 18px",
